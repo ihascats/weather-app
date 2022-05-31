@@ -1,6 +1,7 @@
 async function displayWeather(weatherInformationArray, celsius) {
-  // do stuff
   const weatherInformation = await weatherInformationArray;
+  // if fetch threw an error, end execution here
+  if (weatherInformation === 404) return;
   const [city] = weatherInformation;
   let [
     ,
@@ -11,16 +12,23 @@ async function displayWeather(weatherInformationArray, celsius) {
     pressure,
     windSpeed,
   ] = weatherInformation;
-  const day = weatherDescription.slice(-1);
-  weatherDescription = `http://openweathermap.org/img/wn/${weatherDescription}@2x.png`;
+
+  // get last letter from the icon, if its n that means its night and if its d its day
+  const cycle = weatherDescription.slice(-1);
   const wrapper = document.querySelector('.wrapper');
-  if (day === 'n') {
-    wrapper.style.color = 'white';
-    wrapper.style.background = 'rgb(32 39 72)';
+  // if cycle is n set theme to "night", or if not to "day";
+  if (cycle === 'n') {
+    wrapper.classList.add('night');
+    wrapper.classList.remove('day');
   } else {
-    wrapper.style.color = '';
-    wrapper.style.background = '';
+    wrapper.classList.add('day');
+    wrapper.classList.remove('night');
   }
+
+  weatherDescription = `http://openweathermap.org/img/wn/${weatherDescription}@2x.png`;
+
+  // Change measurement types depending on wether user wants celsius or fahrenheit
+  // Additionally change km/h to mp/h
   if (celsius === true) {
     temperature = `${(temperature - 273.15).toFixed(2)}℃`;
     feelsLike = `${(feelsLike - 273.15).toFixed(2)}℃`;
@@ -34,14 +42,20 @@ async function displayWeather(weatherInformationArray, celsius) {
   humidity = `${humidity}%`;
   pressure = `${pressure} mb`;
 
+  // Display information where its supposed to be shown
+
   const location = document.querySelector('#location');
   location.textContent = city;
+
   const weatherElement = document.querySelector('#weather');
   weatherElement.src = weatherDescription;
+
   const temperatureElement = document.querySelector('#temperature');
   temperatureElement.textContent = temperature;
+
   const feelsLikeElement = document.querySelector('#feelsLike');
   feelsLikeElement.textContent = feelsLike;
+
   const humidityElement = document.querySelector('#humidity');
   humidityElement.textContent = humidity;
 

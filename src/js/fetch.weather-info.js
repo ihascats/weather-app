@@ -6,8 +6,12 @@ async function grabWeatherInfo(query) {
         mode: 'cors',
       },
     );
+    if (response.status === 404) {
+      throw new Error('404');
+    }
     const retrieved = await response.json();
-    // code here
+
+    // Take info to display to user
     const city = retrieved.name;
     const weatherDescription = retrieved.weather[0].icon;
     const temperature = retrieved.main.temp;
@@ -17,6 +21,8 @@ async function grabWeatherInfo(query) {
     // eslint-disable-next-line prefer-destructuring
     const pressure = retrieved.main.pressure;
     const windSpeed = retrieved.wind.speed;
+
+    // Return necessary info
     return [
       city,
       weatherDescription,
@@ -27,8 +33,24 @@ async function grabWeatherInfo(query) {
       windSpeed,
     ];
   } catch (error) {
-    // code here
-    return error;
+    // Tell user theres been an error with query
+    const search = document.querySelector('#search');
+    search.classList.add('error');
+    search.value = '';
+    search.placeholder = "Couldn't find query";
+    search.onclick = () => {
+      search.classList.remove('error');
+      search.placeholder = '';
+      search.onclick = null;
+      search.oninput = null;
+    };
+    search.oninput = () => {
+      search.classList.remove('error');
+      search.placeholder = '';
+      search.onclick = null;
+      search.oninput = null;
+    };
+    return 404;
   }
 }
 

@@ -15,11 +15,21 @@ body {
 .wrapper {
   height: 100vh;
   width: 100vw;
-  background-color: rgb(90, 134, 199);
+
   display: grid;
   align-items: center;
   grid-template-rows: max-content 0.5fr;
   transition: 1s;
+}
+
+.day {
+  background-color: rgb(90, 134, 199);
+  color: black;
+}
+
+.night {
+  background-color: rgb(32, 39, 72);
+  color: white;
 }
 
 .userInput {
@@ -30,7 +40,7 @@ body {
 
 #search {
   width: 100%;
-  background-color: rgb(64, 64, 64);
+  background-color: rgb(133 141 151);
   height: 30px;
   border: none;
   border-right: 2px solid rgb(212, 212, 212);
@@ -96,7 +106,7 @@ h4 {
 
 .wrap > div:first-child {
   display: grid;
-  grid-template-columns: min-content min-content;
+  grid-template-columns: max-content min-content;
   justify-content: center;
   align-items: center;
 }
@@ -106,4 +116,13 @@ h4 {
   text-align: center;
   height: 100px;
   display: grid;
+}
+
+.error {
+  border: 2px solid rgb(180, 0, 0) !important;
+  padding: 0 6px !important;
+}
+
+.error::-webkit-input-placeholder {
+  color: rgb(180, 0, 0);
 }
