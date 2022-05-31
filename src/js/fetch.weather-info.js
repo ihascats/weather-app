@@ -1,7 +1,7 @@
 async function grabWeatherInfo(query) {
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ca299863075664630c1b21144e576529`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&APPID=ca299863075664630c1b21144e576529`,
       {
         mode: 'cors',
       },

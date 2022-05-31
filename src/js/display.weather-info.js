@@ -25,7 +25,7 @@ async function displayWeather(weatherInformationArray, celsius) {
     wrapper.classList.remove('night');
   }
 
-  weatherDescription = `http://openweathermap.org/img/wn/${weatherDescription}@2x.png`;
+  weatherDescription = `https://openweathermap.org/img/wn/${weatherDescription}@2x.png`;
 
   // Change measurement types depending on wether user wants celsius or fahrenheit
   // Additionally change km/h to mp/h
