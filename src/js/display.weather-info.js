@@ -1,5 +1,3 @@
-import capitalizeFirstLetter from './string.capitalize-first';
-
 async function displayWeather(weatherInformationArray, celsius) {
   // do stuff
   const weatherInformation = await weatherInformationArray;
@@ -13,41 +11,45 @@ async function displayWeather(weatherInformationArray, celsius) {
     pressure,
     windSpeed,
   ] = weatherInformation;
-
-  const weatherDisplay = document.querySelector('.weatherInfo');
-  const list = [];
-  weatherDisplay.childNodes.forEach((node) => {
-    if (node.classList) {
-      list.push(node.lastElementChild);
-    }
-  });
-  weatherDescription = capitalizeFirstLetter(weatherDescription);
-
+  const day = weatherDescription.slice(-1);
+  weatherDescription = `http://openweathermap.org/img/wn/${weatherDescription}@2x.png`;
+  const wrapper = document.querySelector('.wrapper');
+  if (day === 'n') {
+    wrapper.style.color = 'white';
+    wrapper.style.background = 'rgb(32 39 72)';
+  } else {
+    wrapper.style.color = '';
+    wrapper.style.background = '';
+  }
   if (celsius === true) {
     temperature = `${(temperature - 273.15).toFixed(2)}℃`;
     feelsLike = `${(feelsLike - 273.15).toFixed(2)}℃`;
+    windSpeed = `${windSpeed} km/h`;
   } else {
     temperature = `${(((temperature - 273.15) * 9) / 5 + 32).toFixed(2)}°F`;
     feelsLike = `${(((feelsLike - 273.15) * 9) / 5 + 32).toFixed(2)}°F`;
+    windSpeed = `${(windSpeed / 1.609).toFixed(2)} mp/h`;
   }
 
   humidity = `${humidity}%`;
   pressure = `${pressure} mb`;
-  windSpeed = `${windSpeed} km/h`;
+
   const location = document.querySelector('#location');
-  location.firstElementChild.textContent = city;
-  const info = [
-    weatherDescription,
-    temperature,
-    feelsLike,
-    humidity,
-    pressure,
-    windSpeed,
-  ];
-  list.forEach((value, index) => {
-    const element = value;
-    element.textContent = info[index];
-  });
+  location.textContent = city;
+  const weatherElement = document.querySelector('#weather');
+  weatherElement.src = weatherDescription;
+  const temperatureElement = document.querySelector('#temperature');
+  temperatureElement.textContent = temperature;
+  const feelsLikeElement = document.querySelector('#feelsLike');
+  feelsLikeElement.textContent = feelsLike;
+  const humidityElement = document.querySelector('#humidity');
+  humidityElement.textContent = humidity;
+
+  const pressureElement = document.querySelector('#pressure');
+  pressureElement.textContent = pressure;
+
+  const windSpeedElement = document.querySelector('#windSpeed');
+  windSpeedElement.textContent = windSpeed;
 }
 
 export default displayWeather;

@@ -18,11 +18,13 @@ body {
   display: grid;
   align-items: center;
   grid-template-rows: max-content 0.5fr;
+  transition: 1s;
 }
 
 .userInput {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 0.2fr auto;
+  justify-content: end;
 }
 
 #search {
@@ -88,10 +90,19 @@ h1 {
 
 h4 {
   letter-spacing: 1px;
+  font-weight: 400;
 }
 
-#location {
+.wrap > div:first-child {
   display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
+  grid-template-columns: min-content min-content;
+  justify-content: center;
+  align-items: center;
+}
+
+#tempDiv {
+  font-size: 64px;
+  text-align: center;
+  height: 100px;
+  display: grid;
 }

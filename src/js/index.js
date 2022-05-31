@@ -24,8 +24,5 @@ document.querySelector('#degree').onclick = (event) => {
     button.textContent = '°F';
   }
   const location = document.querySelector('#location');
-  displayWeather(
-    grabWeatherInfo(location.firstElementChild.textContent),
-    celsius,
-  );
+  displayWeather(grabWeatherInfo(location.textContent), celsius);
 };

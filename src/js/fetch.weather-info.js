@@ -9,7 +9,7 @@ async function grabWeatherInfo(query) {
     const retrieved = await response.json();
     // code here
     const city = retrieved.name;
-    const weatherDescription = retrieved.weather[0].description;
+    const weatherDescription = retrieved.weather[0].icon;
     const temperature = retrieved.main.temp;
     const feelsLike = retrieved.main.feels_like;
     // eslint-disable-next-line prefer-destructuring
