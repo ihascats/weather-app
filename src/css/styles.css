@@ -126,3 +126,15 @@ h4 {
 .error::-webkit-input-placeholder {
   color: rgb(180, 0, 0);
 }
+
+.filler {
+  display: grid;
+  justify-content: center;
+  align-items: end;
+  height: calc(100% - 24px);
+  font-size: 14px;
+}
+
+a {
+  color: inherit;
+}
