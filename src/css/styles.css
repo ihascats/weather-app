@@ -47,6 +47,7 @@ body {
   outline: none;
   padding: 0 8px;
   color: white;
+  min-width: max-content;
 }
 
 button {
